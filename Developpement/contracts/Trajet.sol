@@ -26,9 +26,14 @@ contract Trajet {
   //id on chain
   mapping (uint => address) proprietaireDeTrajet;
   mapping (uint => address) passagerDeTrajet;
+  event EtatOnChange(uint id, uint etat);
 
   function Trajet() {
     trajetCount = 0;
+  }
+
+  function getTrajetCount() view returns(uint){
+    return trajetCount;
   }
 
   function getTrajetById(uint _id) view returns(string, string, string, string, uint, uint, address, address) {
@@ -70,6 +75,7 @@ contract Trajet {
 
     if(t.etat == _etatActuel){
       t.etat = _newEtat;
+      emit EtatOnChange(_id, _newEtat);
     }
   }
 }

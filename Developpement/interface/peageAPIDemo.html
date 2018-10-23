@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Exemple Itinéraire</title>
+	<script src="http://apijsv2.viamichelin.com/apijsv2/api/js?key=JSV2GP20181023112057796425734306$165380
+                 &lang=fra" type="text/javascript"></script>
+</head>
+<body>
+<h1>Itinéraire Paris - Bordeaux</h1>
+<pre id="output"></pre>
+
+<script type="text/javascript">
+	var output = $_id("output"),
+		paris = {
+			coords : {
+				lon : 2.35107,
+				lat : 48.85684
+			}
+		},
+		bordeaux = {
+			coords : {
+				lon : -0.57574,
+				lat : 44.83498
+			}
+		},
+		displayError = function (component, error) {
+			output.innerHTML = "<div>Une erreur s'est produite : " + error + "</div>";
+		},
+		confIti = {
+			steps : [
+				paris,
+				bordeaux
+			]
+		},
+		callbacks = {
+			onSuccess : function (result) {
+				iti = result.header.summaries[0];
+				var t = iti.totalTime,
+					h = Math.floor(t / 3600),
+					m = Math.floor(t % 3600 / 60),
+					report = "";
+				report +=   "Distance : " + iti.totalDist / 1000 + "km";
+				report += "\nDurée    : " + h + "h " + m + "min";
+				report += "\nCoût     : " + iti.tollCost.car / 100 + "€";
+				output.innerHTML = report;
+			},
+			onError : displayError,
+			onInitError : displayError
+		},
+		iti;
+	VMLaunch("ViaMichelin.Api.Itinerary", confIti, callbacks);
+</script>
+</body>
+</html>
+<!--https://api.viamichelin.fr/documentation/api-js/quickstart/-->
