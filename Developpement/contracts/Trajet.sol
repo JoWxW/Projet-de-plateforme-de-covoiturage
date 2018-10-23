@@ -7,6 +7,7 @@ contract Trajet {
     string depart;
     string destination;
     string peage;
+    string tarif;
     bytes signatureDeProprietaire;
     bytes signatureDePassager;
     uint dateAjoute;
@@ -36,12 +37,12 @@ contract Trajet {
     return trajetCount;
   }
 
-  function getTrajetById(uint _id) view returns(string, string, string, string, uint, uint, address, address) {
+  function getTrajetById(uint _id) view returns(string, string, string, string, string, uint, uint, address, address) {
     TrajetSelectionne memory t = trajets[_id];
     uint idTrajet = t.id;
     address proprietaire = proprietaireDeTrajet[idTrajet];
     address passager = passagerDeTrajet[idTrajet];
-    return(t.date, t.depart, t.destination, t.peage, t.dateAjoute, t.etat, proprietaire, passager);
+    return(t.date, t.depart, t.destination, t.peage, t.tarif, t.dateAjoute, t.etat, proprietaire, passager);
   }
 
   function getProprietaireByIdOnChain(uint _id) view returns(address proprietaire) {
@@ -52,8 +53,8 @@ contract Trajet {
     passager = passagerDeTrajet[_id];
   }
 
-  function addTrajet(uint _id, string _date, string _depart, string _destination, string _peage, bytes _signatureDeProprietaire, bytes _signatureDePassager, address _proprietaire, address _passger) {
-    TrajetSelectionne memory t = TrajetSelectionne(trajetCount, _date, _depart, _destination, _peage, _signatureDeProprietaire, _signatureDePassager, now, 0);
+  function addTrajet(uint _id, string _date, string _depart, string _destination, string _peage, string _tarif, bytes _signatureDeProprietaire, bytes _signatureDePassager, address _proprietaire, address _passger) {
+    TrajetSelectionne memory t = TrajetSelectionne(trajetCount, _date, _depart, _destination, _peage, _tarif, _signatureDeProprietaire, _signatureDePassager, now, 0);
     trajets[_id] = t;
     proprietaireDeTrajet[trajetCount] = _proprietaire;
     passagerDeTrajet[trajetCount] = _passger;
