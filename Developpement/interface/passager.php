@@ -1,3 +1,6 @@
+<?php session_start();
+//var_dump($_SESSION["username"]);die;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,7 +29,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">BloCov</a>
+        <a class="navbar-brand" href="index.php">BloCov</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,7 +46,7 @@
     <header class="masthead text-center text-white">
       <div class="masthead-content">
         <div class="container">
-          <h1 class="masthead-heading mb-0">Bonjour, <?php $_SESSION["username"]?></h1>
+          <h1 class="masthead-heading mb-0">Bonjour, <?php echo $_SESSION["username"]; ?></h1>
 
         </div>
       </div>
@@ -52,7 +55,7 @@
 
     <section>
       <div class="container">
-        
+
       </div>
     </section>
 

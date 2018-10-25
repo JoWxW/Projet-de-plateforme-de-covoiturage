@@ -38,7 +38,6 @@ if ($resultat) {
     echo "<td><b>Départ</b></td>";
     echo "<td><b>Destination</b></td>";
     echo "<td><b>Date</b></td>";
-    echo "<td><b>Péage estimé</b></td>";
     echo "<td><b>Prix de trajet</b></td>";
     while ($ligne = mysqli_fetch_array($resultat,MYSQL_NUM))
     {
@@ -49,7 +48,6 @@ if ($resultat) {
             echo "<td>$ligne[2]</td>";
             echo "<td>$ligne[3]</td>";
             echo "<td>$ligne[4]</td>";
-            echo "<td>$ligne[5]</td>";
         echo "</tr>";
 
     }

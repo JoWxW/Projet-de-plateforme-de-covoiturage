@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -21,12 +22,12 @@
 
   </head>
 
-  <body>
+  <body class="proprietaire">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">BloCov</a>
+        <a class="navbar-brand" href="index.php">BloCov</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,36 +40,44 @@
       </div>
     </nav>
 
-    <header class="masthead text-center text-white">
+    <header class="masthead text-white">
       <div class="masthead-content">
         <div class="container">
-          <h1 class="masthead-heading mb-0">Bonjour, <?php $_SESSION[username]?></h1>
+          <h1 class="masthead-heading mb-0">Bonjour, <?php echo $_SESSION["username"]; ?></h1>
 
         </div>
       </div>
 
     </header>
 
-    <section>
+    <section class="proposerTrajet">
       <div class="container">
-        <form method="get" action="identifiant.php">
+        <h2>Proposer un trajet</h2>
+        <form method="get" action="proposition.php">
           <div class="identifier row">
-            <div class="col-sm-12">
-              <label>Nom d'utilisateur: </label>
-              <input type="text" name="username" required="required">
+            <div class="col-sm-3">
+              <input type="text" name="depart" required="required" placeholder="Départ">
             </div>
-            <div class="col-sm-12">
-              <label>Mot de passe: </label>
-              <input type="text" name="motdepasse" required="required">
+            <div class="col-sm-3">
+              <input type="text" name="destination" required="required" placeholder="Destination">
             </div>
-            <div class="col-sm-12">
-              <label>Je m'identifie comme: </label>
-              <input type="radio" name="type" value="proprietaire"> propriétaire de véhicule <br>
-              <input type="radio" name="type" value="passager"> passager<br>
+            <div class="col-sm-3">
+              <input type="text" name="date" required="required" placeholder="Date (ex: May01 pour le 1er mai)">
             </div>
-            <div class="col-sm-12"><input type="submit" value="S'identifier"></div>
+            <div class="col-sm-3">
+              <input type="text" name="prix" required="required" placeholder="Prix">
+            </div>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-4"><input type="submit" value="Proposer"></div>
+            <div class="clearfix visible-xs-block"></div>
           </div>
         </form>
+      </div>
+    </section>
+
+    <section class="commeProprietaire">
+      <div class="container">
+        
       </div>
     </section>
 

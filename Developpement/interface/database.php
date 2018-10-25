@@ -24,22 +24,4 @@ function title($title) {
 
 }
 
-class requete{
-    private $database;
-    private $select;
-
-
-    function __construct($database, $select) {
-        $this->database=$database;
-        $this->select=$select;
-    }
-
-    public function resultat(){
-            $resultat = mysqli_query($this->database, $this->select);
-            $ligne = mysqli_fetch_array($resultat,MYSQL_NUM);
-            return $ligne[0];
-    }
-
-}
-
 ?>

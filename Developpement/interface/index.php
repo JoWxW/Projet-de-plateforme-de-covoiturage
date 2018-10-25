@@ -33,10 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">S'inscrire</a>
+              <a class="nav-link" href="inscription.html">S'inscrire</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">S'identifier</a>
+              <a class="nav-link" href="identifiant.html">S'identifier</a>
             </li>
           </ul>
         </div>

@@ -96,6 +96,15 @@ header.masthead .rechercher input {
 h3.display-4 {
   font-size: 40px;
 }
+.proposerTrajet .col-sm-4 {
+  border-radius: 5px;
+  border: 1px;
+}
+.proposerTrajet .col-sm-3 input {
+  padding: 8px;
+  width: inherit;
+
+}
 
 @media (min-width: 992px) {
   header.masthead {

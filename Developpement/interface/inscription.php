@@ -1,33 +1,31 @@
 <?php
 
 $username =$_GET['username'];
-$motdepasse =$_GET['motdepasse'];
+$motdepasse =hash("md5", $_GET['motdepasse']);
 $address =$_GET['address'];
+
 
 session_start();
 $_SESSION["username"]=$username;
 
 require_once("database.php");
 
-$requete = "SELECT COUNT(*) FROM `utilisateur` WHERE `username`= '$username'";
-$resultat = mysqli_query($database, $requete1);
-
-if ($resultat) {
-    //echo ("ok , la requete1 est correct   <br>\n" );
-    $n = mysqli_fetch_array($resultat,MYSQL_NUM);
-
-}
+$requete = "SELECT idU FROM `utilisateur` WHERE `nom`= '$username'";
+$resultat = mysqli_query($database, $requete);
 
 
-if ($n[0] == 0){
-  $requete2 = "insert into utilisateur values('$username','$motdepasse','$address')";
+if (mysqli_num_rows($resultat) == 0){
+  $requete2 = "INSERT INTO `utilisateur`(`nom`, `motDePasse`, `address`) VALUES ('$username', '$motdepasse', '$address')";
   $resultat2 = mysqli_query($database, $requete2);
-//echo("?-> $requete2 <br>\n");
-//if ($resultat2) {
-//    echo ("ok , la requete2 est correct   <br>\n" );
-//}
+
+  if($resultat2){
     echo("Vous avez bien inscrire <br> Retourner à l'accueil dans 3 secondes");
-    header("refresh:3;url=index.html");
+    header("refresh:3;url=index.php");
+  } else {
+    echo("Problème d'inscription. Retourner à l'inscription dans 3 secondes.");
+    header("refresh:3;url=inscription.html");
+  }
+
 
 }
 else{
