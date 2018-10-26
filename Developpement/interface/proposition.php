@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Déconnecter</a>
+              <a class="nav-link" href="logout.php">Déconnecter</a>
           </ul>
         </div>
       </div>
@@ -44,6 +44,7 @@
       <div class="masthead-content">
         <div class="container">
           <h1 class="masthead-heading mb-0">Bonjour, <?php echo $_SESSION["username"]; ?></h1>
+          <h3 class="role">Role: <?php echo $_SESSION["type"]; ?></h3>
 
         </div>
       </div>
@@ -102,29 +103,30 @@
 
     <section class="historiqueDeProposition">
       <div class="container">
-        <h3>Les trajets proposé par vous</h3>
+        <h3>Les trajets proposés par vous</h3>
         <?php
-          $sqlTrajet = "SELECT t.* FROM `trajet` t, `proposition` p WHERE p.idProprietaire = '$idPro' AND p.idT = t.idT";
+        require_once("database.php");
+          $sqlTrajet = "SELECT t.* FROM `trajet` t, `proposition` p WHERE p.idProprietaire = '2' AND p.idT = t.idT";
           $resultatTrajet = mysqli_query($database, $sqlTrajet);
-          //var_dump($idPro);die;
+          //var_dump($_SESSION["type"]);die;
           if($resultatTrajet) {
-            echo "<table border = 1 align = center>";
-            echo "<td><b>ID</b></td>";
-            echo "<td><b>Départ</b></td>";
-            echo "<td><b>Destination</b></td>";
-            echo "<td><b>Date</b></td>";
-            echo "<td><b>Prix de trajet</b></td>";
+            echo "<div class='historique'>";
+            echo "<div class='col-md-1'>ID</div>";
+            echo "<div class='col-md-3'>Départ</div>";
+            echo "<div class='col-md-3'>Destination</div>";
+            echo "<div class='col-md-2'>Date</div>";
+            echo "<div class='col-md-3'>Prix de trajet</div>";
+            echo "<div class='clearfix'></div>";
             while ($ligne = mysqli_fetch_array($resultatTrajet,MYSQL_NUM))
             {
-              echo "<tr>";
-                  echo "<td>$ligne[0]</td>";
-                  echo "<td>$ligne[1]</td>";
-                  echo "<td>$ligne[2]</td>";
-                  echo "<td>$ligne[3]</td>";
-                  echo "<td>$ligne[4]</td>";
-              echo "</tr>";
+                echo "<div class='col-md-1'>$ligne[0]</div>";
+                echo "<div class='col-md-3'>$ligne[1]</div>";
+                echo "<div class='col-md-3'>$ligne[2]</div>";
+                echo "<div class='col-md-2'>$ligne[3]</div>";
+                echo "<div class='col-md-3'>$ligne[4]</div>";
+                echo "<div class='clearfix'></div>";
             }
-            echo "</table>";
+            echo "</div>";
           }
         ?>
       </div>

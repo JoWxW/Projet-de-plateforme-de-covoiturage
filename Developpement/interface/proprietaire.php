@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Déconnecter</a>
+              <a class="nav-link" href="logout.php">Déconnecter</a>
           </ul>
         </div>
       </div>
@@ -44,7 +44,7 @@
       <div class="masthead-content">
         <div class="container">
           <h1 class="masthead-heading mb-0">Bonjour, <?php echo $_SESSION["username"]; ?></h1>
-
+          <h3 class="role">Role: <?php echo $_SESSION["type"]; ?></h3>
         </div>
       </div>
 
@@ -75,9 +75,25 @@
       </div>
     </section>
 
-    <section class="commeProprietaire">
+    <section class="trajetEffectue">
       <div class="container">
-        
+        <h2>Trajets on blockchain</h2>
+        <div id="trajetOnChain"></div>
+        <h3>Changer état d'un trajet</h3>
+        <form class="row" name="trajetsOnChain" method="get" action="changerEtat.php">
+          <div class="col-sm-3">
+            <input type="text" name="trajetId" required="required" placeholder="ID de Trajet">
+          </div>
+          <div class="col-sm-3">
+            <input type="text" name="etatActuel" required="required" placeholder="Etat actuel">
+          </div>
+          <div class="col-sm-3">
+            <input type="text" name="etatNouveau" required="required" placeholder="Nouveau état">
+          </div>
+          <div class="clearfix visible-xs-block"></div>
+          <div class="col-sm-4"><button id="trajetEtatOnChange">Changer</button></div>
+          <div class="clearfix visible-xs-block"></div>
+        </form>
       </div>
     </section>
 

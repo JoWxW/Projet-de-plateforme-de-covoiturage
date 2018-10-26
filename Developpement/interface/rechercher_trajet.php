@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Jo">
 
-    <title>Rechercher un trajet</title>
+    <title>Demo - Plateform de Covoiturage</title>
 
     <!-- Bootstrap core CSS -->
     <link href="style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,46 +23,88 @@
   </head>
 
   <body>
-    <h3><br><b>Liste des comptes</b></h3>
-<?php
-$depart =$_GET['depart'];
-$destination =$_GET['destination'];
-$date = $_GET['date'];
-require_once("database.php");
-$requete = "select * from trajet where depart='$depart' and destination='$destination' and date='$date'";
-$resultat = mysqli_query($database, $requete);
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.php">BloCov</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead text-white">
+      <div class="masthead-content">
+        <div class="container">
+          <h1>Resultats</h1>
+        </div>
+      </div>
+
+    </header>
+<section>
+    <div class="container">
+    <?php
+      //var_dump(isset($_SESSION['username']));die;
+      $depart =$_GET['depart'];
+      $destination =$_GET['destination'];
+      $date = $_GET['date'];
+      $_SESSION["depart"]=$depart;
+      $_SESSION["destination"]=$destination;
+      $_SESSION["date"]=$date;
+      require_once("database.php");
+      $requete = "select t.* from trajet t, proposition p where t.idT = p.idT and depart='$depart' and destination='$destination' and date='$date'";
+      $resultat = mysqli_query($database, $requete);
 
 
-if ($resultat) {
-    echo "<table border = 1 align = center>";
-    echo "<td><b>ID</b></td>";
-    echo "<td><b>Départ</b></td>";
-    echo "<td><b>Destination</b></td>";
-    echo "<td><b>Date</b></td>";
-    echo "<td><b>Prix de trajet</b></td>";
-    while ($ligne = mysqli_fetch_array($resultat,MYSQL_NUM))
-    {
+      if (mysqli_num_rows($resultat)>0) {
+        echo "<div class='historique'>";
+        echo "<div class='col-md-1'>ID</div>";
+        echo "<div class='col-md-3'>Départ</div>";
+        echo "<div class='col-md-3'>Destination</div>";
+        echo "<div class='col-md-2'>Date</div>";
+        echo "<div class='col-md-3'>Prix de trajet</div>";
+        echo "<div class='clearfix'></div>";
+          while ($ligne = mysqli_fetch_array($resultat,MYSQL_NUM))
+          {
 
-        echo "<tr>";
-            echo "<td>$ligne[0]</td>";
-            echo "<td>$ligne[1]</td>";
-            echo "<td>$ligne[2]</td>";
-            echo "<td>$ligne[3]</td>";
-            echo "<td>$ligne[4]</td>";
-        echo "</tr>";
+            echo "<div class='col-md-1'>$ligne[0]</div>";
+            echo "<div class='col-md-3'>$ligne[1]</div>";
+            echo "<div class='col-md-3'>$ligne[2]</div>";
+            echo "<div class='col-md-2'>$ligne[3]</div>";
+            echo "<div class='col-md-3'>$ligne[4]</div>";
+            echo "<div class='clearfix'></div>";
 
-    }
-    echo "</table>";
-}
-else {
-    echo("ko , il y a un probleme <br>\n");
-    echo(mysqli_error($database));
+          }
+          echo "</div>";
+      }
+      else {
+          echo("<div>Il n'existe pas de trajet correspond à votre attends.</div>");
+          echo(mysqli_error($database));
 
-}
-}
-mysqli_free_result($resultat);
-mysqli_close($database);
-?>
+      }
+      //mysqli_free_result($resultat);
+      //mysqli_close($database);
+    ?>
+    </div>
+</section>
+<section>
+  <div class="choisir container">
+    <h2>Choisir votre trajet</h2>
+    <form method="get" action="choix.php">
+      <div class="choix row">
+        <div class="col-sm-3">
+          <input type="text" name="idTrajetchoisi" required="required" placeholder="ID de trajet">
+        </div>
+        <div class="clearfix visible-xs-block"></div>
+        <div class="col-sm-4"><input type="submit" value="Choisir"></div>
+        <div class="clearfix visible-xs-block"></div>
+      </div>
+    </form>
+  </div>
+</section>
 <!-- Footer -->
 <footer class="py-5 bg-black">
   <div class="container">

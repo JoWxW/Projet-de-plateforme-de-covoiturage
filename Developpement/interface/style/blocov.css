@@ -100,10 +100,13 @@ h3.display-4 {
   border-radius: 5px;
   border: 1px;
 }
-.proposerTrajet .col-sm-3 input {
+.proposerTrajet .col-sm-3 input, .trajetEffectue .col-sm-3 input {
   padding: 8px;
   width: inherit;
 
+}
+.historique .col-md-3 div, .historique .col-md-2 div {
+  display: inline !important;
 }
 
 @media (min-width: 992px) {

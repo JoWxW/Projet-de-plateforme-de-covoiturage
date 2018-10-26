@@ -126,6 +126,9 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="style/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/blocov.js"></script>
 
   </body>
 

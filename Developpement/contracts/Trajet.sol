@@ -7,8 +7,6 @@ contract Trajet {
     string depart;
     string destination;
     string tarif;
-    bytes signatureDeProprietaire;
-    bytes signatureDePassager;
     uint dateAjoute;
     //Etat:
     //0 = le trajet a été signé par prorpiétaire et passger,
@@ -53,8 +51,8 @@ contract Trajet {
     passager = passagerDeTrajet[_id];
   }
 
-  function addTrajet(uint _id, string _date, string _depart, string _destination, string _tarif, bytes _signatureDeProprietaire, bytes _signatureDePassager, address _proprietaire, address _passger) {
-    TrajetSelectionne memory t = TrajetSelectionne(trajetCount, _date, _depart, _destination,  _tarif, _signatureDeProprietaire, _signatureDePassager, now, 0);
+  function addTrajet(uint _id, string _date, string _depart, string _destination, string _tarif, address _proprietaire, address _passger) {
+    TrajetSelectionne memory t = TrajetSelectionne(trajetCount, _date, _depart, _destination,  _tarif, now, 0);
     trajets[_id] = t;
     proprietaireDeTrajet[trajetCount] = _proprietaire;
     passagerDeTrajet[trajetCount] = _passger;

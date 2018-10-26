@@ -47,6 +47,7 @@
       <div class="masthead-content">
         <div class="container">
           <h1 class="masthead-heading mb-0">Bonjour, <?php echo $_SESSION["username"]; ?></h1>
+          <h3 class="role">Role: <?php echo $_SESSION["type"]; ?></h3>
 
         </div>
       </div>
@@ -54,8 +55,24 @@
     </header>
 
     <section>
-      <div class="container">
-
+      <div class="container choisirTrajet">
+        <h2>Rechercher et choisir un trajet</h2>
+        <form class="row" method="get" action="rechercher_trajet.php">
+          <div class="rechercher row">
+            <div class="col-sm-3"><input type="text" name="depart" required="required" placeholder="Départ"></div>
+            <div class="col-sm-3"><input type="text" name="destination" required="required" placeholder="Destination"></div>
+            <div class="col-sm-3"><input type="text" name="date" required="required" placeholder="Date(ex: Nov01)"></div>
+            <div class="col-sm-3"><input type="submit" value="Rechercher"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section>
+      <div class="container historiqueSurChain">
+        <h2>Trajets enregistré sur la Blockchain</h2>
+          <div class="row">
+            
+          </div>
       </div>
     </section>
 
