@@ -1,5 +1,5 @@
 <?php session_start();
-//var_dump($_SESSION["username"]);die;
+//var_dump($_SESSION);die;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,7 +24,7 @@
 
   </head>
 
-  <body>
+  <body class="passager">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Déconnecter</a>
+              <a class="nav-link" href="logout.php">Déconnecter</a>
             </li>
           </ul>
         </div>
@@ -70,9 +70,22 @@
     <section>
       <div class="container historiqueSurChain">
         <h2>Trajets enregistré sur la Blockchain</h2>
-          <div class="row">
-            
+          <div class="row" id="historique">
+
           </div>
+          <h3>Changer état d'un trajet</h3>
+            <div class="col-sm-3">
+              <input type="text" id="trajetId" required="required" placeholder="ID de Trajet">
+            </div>
+            <div class="col-sm-3">
+              <input type="text" id="etatActuel" required="required" placeholder="Etat actuel">
+            </div>
+            <div class="col-sm-3">
+              <input type="text" id="etatNouveau" required="required" placeholder="Nouveau état">
+            </div>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-4"><button id="trajetEtatOnChange">Changer</button></div>
+            <div class="clearfix visible-xs-block"></div>
       </div>
     </section>
 
@@ -87,6 +100,22 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="style/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/blocov.js"></script>
+    <script type="text/javascript">
+    var typeActuel ='<?php echo $_SESSION["type"] ?>';
+    var addressActuel ='<?php echo $_SESSION["address"] ?>';
+    $(document).ready(function() {
+      $(".passager #historique").html(getTrajets(addressActuel, typeActuel));
+    });
+    $("#trajetEtatOnChange").click(function() {
+      changerEtatOnChain($("#trajetId").val(), $("#etatActuel").val(), $("#etatNouveau").val(), addressActuel);
+      setTimeout(function(){
+        location.reload();
+      }, 100);
+    });
+    </script>
 
   </body>
 

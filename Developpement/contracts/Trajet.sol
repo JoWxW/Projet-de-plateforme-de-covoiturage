@@ -1,8 +1,6 @@
 pragma solidity ^0.4.24;
 contract Trajet {
   struct TrajetSelectionne {
-    //id of trajet on chain
-    uint id;
     string date;
     string depart;
     string destination;
@@ -18,12 +16,13 @@ contract Trajet {
   }
   uint trajetCount;
 
-//id(in local database) => trajet
+//id(on chain) => trajet
   mapping (uint => TrajetSelectionne) trajets;
   //TrajetSelectionne[] trajets;
   //id on chain
   mapping (uint => address) proprietaireDeTrajet;
   mapping (uint => address) passagerDeTrajet;
+  mapping (uint => uint) idBDDToIdOnChain;
   event EtatOnChange(uint id, uint etat);
   event SendBackErr(bool isWrong);
 
@@ -35,11 +34,18 @@ contract Trajet {
     return trajetCount;
   }
 
-  function getTrajetById(uint _id) view returns(string, string, string, string, uint, uint, address, address) {
+  function getTrajetByIdBDD(uint _id) view returns(string, string, string, string, uint, uint, address, address) {
+    uint idOnChain = idBDDToIdOnChain[_id];
+    TrajetSelectionne memory t = trajets[idOnChain];
+    address proprietaire = proprietaireDeTrajet[idOnChain];
+    address passager = passagerDeTrajet[idOnChain];
+    return(t.date, t.depart, t.destination, t.tarif, t.dateAjoute, t.etat, proprietaire, passager);
+  }
+
+  function getTrajetByIdOnChain(uint _id) view returns(string, string, string, string, uint, uint, address, address) {
     TrajetSelectionne memory t = trajets[_id];
-    uint idTrajet = t.id;
-    address proprietaire = proprietaireDeTrajet[idTrajet];
-    address passager = passagerDeTrajet[idTrajet];
+    address proprietaire = proprietaireDeTrajet[_id];
+    address passager = passagerDeTrajet[_id];
     return(t.date, t.depart, t.destination, t.tarif, t.dateAjoute, t.etat, proprietaire, passager);
   }
 
@@ -52,18 +58,20 @@ contract Trajet {
   }
 
   function addTrajet(uint _id, string _date, string _depart, string _destination, string _tarif, address _proprietaire, address _passger) {
-    TrajetSelectionne memory t = TrajetSelectionne(trajetCount, _date, _depart, _destination,  _tarif, now, 0);
-    trajets[_id] = t;
+    TrajetSelectionne memory t = TrajetSelectionne(_date, _depart, _destination,  _tarif, now, 0);
+    trajets[trajetCount] = t;
     proprietaireDeTrajet[trajetCount] = _proprietaire;
     passagerDeTrajet[trajetCount] = _passger;
+    idBDDToIdOnChain[_id] = trajetCount;
     trajetCount++;
   }
 
   function changerEtat(uint _id, uint _etatActuel, uint _newEtat) returns(bool) {
-    TrajetSelectionne storage t = trajets[_id];
-    uint idTrajet = t.id;
-    address proprietaire = proprietaireDeTrajet[idTrajet];
-    address passager = passagerDeTrajet[idTrajet];
+    uint idOnChain = idBDDToIdOnChain[_id];
+    TrajetSelectionne storage t = trajets[idOnChain];
+
+    address proprietaire = proprietaireDeTrajet[idOnChain];
+    address passager = passagerDeTrajet[idOnChain];
     if(_newEtat == 1 || _newEtat == 4){
       //require(msg.sender == proprietaire || msg.sender == passager);
       if(msg.sender != proprietaire && msg.sender != passager){
@@ -86,7 +94,7 @@ contract Trajet {
 
     if(t.etat == _etatActuel){
       t.etat = _newEtat;
-      emit EtatOnChange(_id, _newEtat);
+      emit EtatOnChange(_id, t.etat);
       return true;
     } else {
       emit SendBackErr(true);

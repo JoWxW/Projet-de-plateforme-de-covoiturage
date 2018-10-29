@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start();
+//var_dump($_SESSION);die;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -80,20 +83,18 @@
         <h2>Trajets on blockchain</h2>
         <div id="trajetOnChain"></div>
         <h3>Changer état d'un trajet</h3>
-        <form class="row" name="trajetsOnChain" method="get" action="changerEtat.php">
           <div class="col-sm-3">
-            <input type="text" name="trajetId" required="required" placeholder="ID de Trajet">
+            <input type="text" id="trajetId" required="required" placeholder="ID de Trajet">
           </div>
           <div class="col-sm-3">
-            <input type="text" name="etatActuel" required="required" placeholder="Etat actuel">
+            <input type="text" id="etatActuel" required="required" placeholder="Etat actuel">
           </div>
           <div class="col-sm-3">
-            <input type="text" name="etatNouveau" required="required" placeholder="Nouveau état">
+            <input type="text" id="etatNouveau" required="required" placeholder="Nouveau état">
           </div>
           <div class="clearfix visible-xs-block"></div>
           <div class="col-sm-4"><button id="trajetEtatOnChange">Changer</button></div>
           <div class="clearfix visible-xs-block"></div>
-        </form>
       </div>
     </section>
 
@@ -108,7 +109,22 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="style/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/blocov.js"></script>
+    <script type="text/javascript">
+    var typeActuel ='<?php echo $_SESSION["type"] ?>';
+    var addressActuel ='<?php echo $_SESSION["address"] ?>';
+    $(document).ready(function() {
+      $("#trajetOnChain").html(getTrajets(addressActuel, typeActuel));
+    });
+    $("#trajetEtatOnChange").click(function() {
+      changerEtatOnChain($("#trajetId").val(), $("#etatActuel").val(), $("#etatNouveau").val(), addressActuel);
+      setTimeout(function(){
+        location.reload();
+      }, 100);
+    });
+    </script>
   </body>
 
 </html>

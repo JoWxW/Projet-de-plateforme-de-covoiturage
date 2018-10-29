@@ -16,8 +16,9 @@ contract('Trajet test', async (accounts) => {
      //let signaturePro = web3.eth.sign(accounts[1], string);
      //let signaturePas = web3.eth.sign(accounts[2], string);
      await instance.addTrajet.sendTransaction(23, "Nov01", "Paris", "Bordeaux", "55.6€", accounts[1], accounts[2], {from: accounts[0], gas:3000000});
+     await instance.addTrajet.sendTransaction(24, "Nov02", "Paris", "Bordeaux", "55.6€", accounts[1], accounts[2], {from: accounts[0], gas:3000000});
      let nbTrajet = await instance.getTrajetCount.call();
-     assert.equal(nbTrajet.valueOf(), 1);
+     assert.equal(nbTrajet.valueOf(), 2);
   });
 
   it("should return the address of passenger", async () => {
@@ -29,7 +30,8 @@ contract('Trajet test', async (accounts) => {
   it("should change status", async () => {
      let instance = await Trajet.deployed();
      await instance.changerEtat(23, 0, 1, {from: accounts[1], gas:3000000})
-     let trajet = await instance.getTrajetById.call(23);
+     let trajet = await instance.getTrajetByIdBDD.call(23);
+     //assert.equal(trajet[6].valueOf(), 1);
      assert.equal(trajet[5].valueOf(), 1);
   });
 })
