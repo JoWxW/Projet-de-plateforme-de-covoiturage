@@ -25,6 +25,7 @@ So an environment of real Ethereum is simulated.)
 Enter into the local database(localhost/phpmyadmin) with username="root" and password="".
 
 Create a new database named 'demo_covoiturage' and import the file demo_covoiturage.sql (\Projet-de-plateforme-de-covoiturage\Developpement\interface\) into current database.
+
 2. Setup test net (In Powershell/Terminal)
 > testrpc
 3. Compile & Test (In a new window of Powershell/Terminal)
