@@ -46,6 +46,12 @@ Create a new database named 'demo_covoiturage' and import the file demo_covoitur
 
 7. The demo should run.
 
+## Language
+- Solidity
+- PHP
+- Javascript
+- HTML, CSS
+
 ## Reference
 [Truffle Doc](https://truffleframework.com/docs/truffle/overview)
 
