@@ -67,11 +67,11 @@ contract Trajet {
   }
 
   function changerEtat(uint _id, uint _etatActuel, uint _newEtat) returns(bool) {
-    uint idOnChain = idBDDToIdOnChain[_id];
-    TrajetSelectionne storage t = trajets[idOnChain];
+    //uint idOnChain = idBDDToIdOnChain[_id];
+    TrajetSelectionne storage t = trajets[_id];
 
-    address proprietaire = proprietaireDeTrajet[idOnChain];
-    address passager = passagerDeTrajet[idOnChain];
+    address proprietaire = proprietaireDeTrajet[_id];
+    address passager = passagerDeTrajet[_id];
     if(_newEtat == 1 || _newEtat == 4){
       //require(msg.sender == proprietaire || msg.sender == passager);
       if(msg.sender != proprietaire && msg.sender != passager){

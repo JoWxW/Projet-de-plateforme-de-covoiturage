@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start();
+//var_dump($_SESSION);die;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -106,9 +109,9 @@
         <h3>Les trajets proposés par vous</h3>
         <?php
         require_once("database.php");
-          $sqlTrajet = "SELECT t.* FROM `trajet` t, `proposition` p WHERE p.idProprietaire = '2' AND p.idT = t.idT";
+          $sqlTrajet = "SELECT t.* FROM `trajet` t, `proposition` p WHERE p.idProprietaire = $idPro AND p.idT = t.idT";
           $resultatTrajet = mysqli_query($database, $sqlTrajet);
-          //var_dump($_SESSION["type"]);die;
+          //var_dump($sqlTrajet);die;
           if($resultatTrajet) {
             echo "<div class='historique'>";
             echo "<div class='col-md-1'>ID</div>";

@@ -1,3 +1,7 @@
+<?php
+session_start();
+//var_dump($_SESSION);die;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -31,14 +35,24 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="inscription.html">S'inscrire</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="identifiant.html">S'identifier</a>
-            </li>
-          </ul>
+          <?php
+          if(isset($_SESSION['username'])){
+            echo '<ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="logout.php">Déconnecter</a>
+            </ul>';
+          } else {
+            echo "<ul class='navbar-nav ml-auto'>
+              <li class='nav-item'>
+                <a class='nav-link' href='inscription.html'>S'inscrire</a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='identifiant.html'>S'identifier</a>
+              </li>
+            </ul>";
+          }
+           ?>
+
         </div>
       </div>
     </nav>
@@ -66,7 +80,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="img/01.jpg" alt="">
+              <img class="img-fluid rounded-circle" src="style/img/inspiration-voyage.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">
@@ -84,7 +98,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="img/02.jpg" alt="">
+              <img class="img-fluid rounded-circle" src="style/img/inspiration-stranger.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6">
@@ -102,7 +116,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
+              <img class="img-fluid rounded-circle" src="style/img/inspiration-code.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">

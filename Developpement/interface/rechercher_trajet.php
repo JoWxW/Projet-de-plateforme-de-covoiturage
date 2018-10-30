@@ -31,7 +31,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-
+          <?php
+          if(isset($_SESSION['username'])){
+            echo '<ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="logout.php">Déconnecter</a>
+            </ul>';
+          } else {
+            echo "<ul class='navbar-nav ml-auto'>
+              <li class='nav-item'>
+                <a class='nav-link' href='inscription.html'>S'inscrire</a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='identifiant.html'>S'identifier</a>
+              </li>
+            </ul>";
+          }
+           ?>
         </div>
       </div>
     </nav>
@@ -45,7 +61,7 @@
 
     </header>
 <section>
-    <div class="container">
+    <div class="container rechercherTrajet">
     <?php
       //var_dump(isset($_SESSION['username']));die;
       $depart =$_GET['depart'];
@@ -60,25 +76,25 @@
 
 
       if (mysqli_num_rows($resultat)>0) {
-        echo "<div class='historique'>";
+        echo "<div class='resultats'>";
         echo "<div class='col-md-1'>ID</div>";
         echo "<div class='col-md-3'>Départ</div>";
         echo "<div class='col-md-3'>Destination</div>";
         echo "<div class='col-md-2'>Date</div>";
-        echo "<div class='col-md-3'>Prix de trajet</div>";
+        echo "<div class='col-md-3'>Prix de trajet</div></div>";
         echo "<div class='clearfix'></div>";
           while ($ligne = mysqli_fetch_array($resultat,MYSQL_NUM))
           {
 
-            echo "<div class='col-md-1'>$ligne[0]</div>";
+            echo "<div class='lines'><div class='col-md-1'>$ligne[0]</div>";
             echo "<div class='col-md-3'>$ligne[1]</div>";
             echo "<div class='col-md-3'>$ligne[2]</div>";
             echo "<div class='col-md-2'>$ligne[3]</div>";
-            echo "<div class='col-md-3'>$ligne[4]</div>";
+            echo "<div class='col-md-3'>$ligne[4]</div></div>";
             echo "<div class='clearfix'></div>";
 
           }
-          echo "</div>";
+          //echo "</div>";
       }
       else {
           echo("<div>Il n'existe pas de trajet correspond à votre attends.</div>");
@@ -93,16 +109,23 @@
 <section>
   <div class="choisir container">
     <h2>Choisir votre trajet</h2>
-    <form method="get" action="choix.php">
-      <div class="choix row">
-        <div class="col-sm-3">
-          <input type="text" name="idTrajetchoisi" required="required" placeholder="ID de trajet">
+    <?php
+    if(isset($_SESSION['username'])){
+      echo '<form method="get" action="choix.php">
+        <div class="choix row">
+          <div class="col-sm-3">
+            <input type="text" name="idTrajetchoisi" required="required" placeholder="ID de trajet">
+          </div>
+          <div class="clearfix visible-xs-block"></div>
+          <div class="col-sm-4"><input type="submit" value="Choisir"></div>
+          <div class="clearfix visible-xs-block"></div>
         </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-4"><input type="submit" value="Choisir"></div>
-        <div class="clearfix visible-xs-block"></div>
-      </div>
-    </form>
+      </form>';
+    }else {
+      echo "<h3>Veuillez <a class='underline' href='identifier.html'>vous identifier</a> ou <a class='underline' href='inscription.html'>vous inscrire</a> pour choisir un trajet.</h3>";
+    }
+    ?>
+
   </div>
 </section>
 <!-- Footer -->

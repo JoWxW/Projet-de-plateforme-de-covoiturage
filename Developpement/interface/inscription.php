@@ -53,8 +53,6 @@ $username =$_GET['username'];
 $motdepasse =hash("md5", $_GET['motdepasse']);
 $address =$_GET['address'];
 
-
-session_start();
 $_SESSION["username"]=$username;
 
 require_once("database.php");

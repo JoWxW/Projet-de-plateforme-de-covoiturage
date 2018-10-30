@@ -255,9 +255,9 @@
       "stateMutability": "nonpayable",
       "type": "function"
     }
-  ],
+  ]
   );
-  var trajet = trajetContract.at('0xff1723f2355a984e585f6623203f72b757346b74');
+  var trajet = trajetContract.at('0x112d3fa8bf0a85dd18a92eb78f442dac95d116fc');
 
   function getTrajetNb(){
     var nb = trajet.getTrajetCount.call();

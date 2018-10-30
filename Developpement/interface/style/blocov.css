@@ -16,11 +16,23 @@ h2,
 h1 {
   font-weight: 800;
 }
-h2 {
+header h2 {
   font-weight: 400;
   font-style: italic;
 }
-
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+section {
+  margin: 20px 0px;
+}
+.rechercherTrajet .resultats {
+  font-weight: bold;
+}
+.etat {
+  display: block;
+}
 .btn-xl {
   text-transform: uppercase;
   padding: 1.5rem 3rem;
@@ -122,36 +134,6 @@ h3.display-4 {
   }
 }
 
-.bg-primary {
-  background-color: #ee0979 !important;
-}
-
-.btn-primary {
-  background-color: #ee0979;
-  border-color: #ee0979;
-}
-
-.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background-color: #bd0760 !important;
-  border-color: #bd0760 !important;
-}
-
-.btn-primary:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
-}
-
-.btn-secondary {
-  background-color: #ff6a00;
-  border-color: #ff6a00;
-}
-
-.btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
-  background-color: #cc5500 !important;
-  border-color: #cc5500 !important;
-}
-
-.btn-secondary:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
+.underline{
+  text-decoration: underline;
 }

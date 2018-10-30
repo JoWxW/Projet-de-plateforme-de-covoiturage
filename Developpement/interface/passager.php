@@ -58,7 +58,7 @@
       <div class="container choisirTrajet">
         <h2>Rechercher et choisir un trajet</h2>
         <form class="row" method="get" action="rechercher_trajet.php">
-          <div class="rechercher row">
+          <div class="rechercher">
             <div class="col-sm-3"><input type="text" name="depart" required="required" placeholder="Départ"></div>
             <div class="col-sm-3"><input type="text" name="destination" required="required" placeholder="Destination"></div>
             <div class="col-sm-3"><input type="text" name="date" required="required" placeholder="Date(ex: Nov01)"></div>
@@ -74,18 +74,31 @@
 
           </div>
           <h3>Changer état d'un trajet</h3>
-            <div class="col-sm-3">
-              <input type="text" id="trajetId" required="required" placeholder="ID de Trajet">
-            </div>
-            <div class="col-sm-3">
-              <input type="text" id="etatActuel" required="required" placeholder="Etat actuel">
-            </div>
-            <div class="col-sm-3">
-              <input type="text" id="etatNouveau" required="required" placeholder="Nouveau état">
-            </div>
+          <div class="etat">
+            Etat:<br/>
+            0 = le trajet a été signé par prorpiétaire et passger<br/>
+            1 = Le trajet est en cours<br/>
+            2 = le passager a payé le trajet<br/>
+            3 = le propriétaire a validé le trajet = ce trajet est terminé<br/>
+            <p>4 = le passger ou le propriétaire a signalé un probleme sur le trajet</p>
             <div class="clearfix visible-xs-block"></div>
-            <div class="col-sm-4"><button id="trajetEtatOnChange">Changer</button></div>
-            <div class="clearfix visible-xs-block"></div>
+          </div>
+          <div class="row">
+
+              <div class="col-sm-3">
+                <input type="text" id="trajetId" required="required" placeholder="ID de Trajet">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" id="etatActuel" required="required" placeholder="Etat actuel">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" id="etatNouveau" required="required" placeholder="Nouveau état">
+              </div>
+              <div class="clearfix visible-xs-block"></div>
+              <div class="col-sm-4"><button id="trajetEtatOnChange">Changer</button></div>
+              <div class="clearfix visible-xs-block"></div>
+
+          </div>
       </div>
     </section>
 

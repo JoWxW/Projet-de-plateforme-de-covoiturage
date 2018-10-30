@@ -29,7 +29,7 @@ contract('Trajet test', async (accounts) => {
 
   it("should change status", async () => {
      let instance = await Trajet.deployed();
-     await instance.changerEtat(23, 0, 1, {from: accounts[1], gas:3000000})
+     await instance.changerEtat(0, 0, 1, {from: accounts[1], gas:3000000})
      let trajet = await instance.getTrajetByIdBDD.call(23);
      //assert.equal(trajet[6].valueOf(), 1);
      assert.equal(trajet[5].valueOf(), 1);
