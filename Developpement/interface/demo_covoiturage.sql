@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `proposition` (
 -- Dumping data for table `proposition`
 --
 
-INSERT INTO `proposition` (`idP`, `idProprietaire`, `idT`) VALUES
+/*INSERT INTO `proposition` (`idP`, `idProprietaire`, `idT`) VALUES
 (1, 2, 12),
 (2, 2, 13),
 (3, 2, 14),
@@ -54,7 +54,7 @@ INSERT INTO `proposition` (`idP`, `idProprietaire`, `idT`) VALUES
 (11, 5, 22),
 (12, 5, 23),
 (13, 5, 24),
-(14, 5, 25);
+(14, 5, 25);*/
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `trajet` (
 -- Dumping data for table `trajet`
 --
 
-INSERT INTO `trajet` (`idT`, `depart`, `destination`, `date`, `tarif`) VALUES
+/*INSERT INTO `trajet` (`idT`, `depart`, `destination`, `date`, `tarif`) VALUES
 (1, '', '', '', ''),
 (2, '', '', '', ''),
 (3, '', '', '', ''),
@@ -102,7 +102,7 @@ INSERT INTO `trajet` (`idT`, `depart`, `destination`, `date`, `tarif`) VALUES
 (23, 'Paris', 'Metz', 'Oct31', '25'),
 (24, 'Paris', 'Metz', 'Oct31', '25'),
 (25, 'Paris', 'Metz', 'Oct31', '25'),
-(26, 'Paris', 'Troyes', 'Nov03', '10');
+(26, 'Paris', 'Troyes', 'Nov03', '10');*/
 
 -- --------------------------------------------------------
 
@@ -124,12 +124,12 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Dumping data for table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`idU`, `nom`, `motDePasse`, `address`) VALUES
+/*INSERT INTO `utilisateur` (`idU`, `nom`, `motDePasse`, `address`) VALUES
 (1, 'test0', 'motDePasse', 'address'),
 (2, 'test1', '5a105e8b9d40e1329780d62ea2265d8a', '0xe49bf8c999aafa1652cdd40342d3a0a7a542282a'),
 (3, 'test', 'motDePasse', 'address'),
 (4, 'client2', '2c66045d4e4a90814ce9280272e510ec', '0x0fcee201b5da2438fc589b3a6567055b150d9afe'),
-(5, 'client1', 'a165dd3c2e98d5d607181d0b87a4c66b', '0xf4d89e21c8934a5f5465574a26a8cd0e04186198');
+(5, 'client1', 'a165dd3c2e98d5d607181d0b87a4c66b', '0xf4d89e21c8934a5f5465574a26a8cd0e04186198');*/
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
